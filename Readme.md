@@ -1,7 +1,7 @@
 # Личный проект «TaskForce»
 
 * Студент: [Евгения Осипова](https://up.htmlacademy.ru/yii/2/user/2000829).
-* Наставник: `Неизвестно`.
+* Наставник: [Сергей Парфенов](https://htmlacademy.ru/profile/id926645).
 
 ---
 
