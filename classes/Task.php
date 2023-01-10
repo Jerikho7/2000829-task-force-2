@@ -4,7 +4,7 @@ class Task
 {
     public const STATUS_NEW = 'new';
     public const STATUS_CANCEL = 'cancelled';
-    public const STATUS_WAIT = 'waiting'; // мжн ли доваить новый статус типо в ожидании? ответа на принятие от заказчика? или new оставить?
+    public const STATUS_WAIT = 'waiting';
     public const STATUS_WORK = 'at_work';
     public const STATUS_DONE = 'done';
     public const STATUS_FAIL = 'failed';
@@ -15,14 +15,14 @@ class Task
     public const ACTION_DONE = 'done';
     public const ACTION_DENY = 'deny';
 
-    private $customer_id = 1; // типо пока нет базы данных можно присвоить id?
-    private $implementer_id = 2;
-    private $current_status;
+    private $customer_id;
+    private $implementer_id;
+    private $status;
 
-    public function __construct($current_id, $current_status)
+    public function __construct($current_id, $status)
     {
         $this->current_id = $current_id;
-        $this->current_status = $current_status;
+        $this->status = $status;
     }
 
     public function getMapStatus(): array
@@ -48,22 +48,22 @@ class Task
         ];
     }
 
-    public function getAvailableAction($current_id, $current_status): string
+    public function getAvailableActions($current_id, $status): string
     {
-        if ($current_id === $this->customer_id) { // с какими данными будет сравниваться current_id
+        if ($current_id === $this->customer_id) {
             $availableAction = [
                 self::STATUS_NEW => self::ACTION_CANCEL,
                 self::STATUS_WAIT => self::ACTION_ACCEPT,
                 self::STATUS_WORK => self::ACTION_DONE
             ];
-            return $availableAction[$current_status];
+            return $availableAction[$this->status];
         }
         if ($current_id === $this->implementer_id) {
             $availableAction = [
                 self::STATUS_NEW => self::ACTION_RESPOND,
                 self::STATUS_WORK => self::ACTION_DENY
             ];
-            return $availableAction[$current_status];
+            return $availableAction[$this->status];
         }
         return 'Пользователь не найден!';
     }
