@@ -1,0 +1,16 @@
+{
+    "name": "evgeniaosipova/2000829-task-force-2",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "TaskForce\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Evgeniya",
+            "email": "osipova.dr17@yandex.ru"
+        }
+    ],
+    "require": {}
+}
