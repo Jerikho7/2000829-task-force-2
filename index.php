@@ -1,5 +1,7 @@
 <?php
-require_once 'classes/Task.php';
+use TaskForce\classes\Task;
+
+require_once 'vendor/autoload.php';
 
 $task = new Task(1, 'new');
 
