@@ -1,0 +1,65 @@
+
+src
+|____Classes
+|    |____User
+|    |    |____Events
+|    |    |    |__ChangeData.php
+|    |    |    |__ChangePassword.php
+|    |    |    |
+|    |    |
+|    |    |__User.php
+|    |    |__Сustomer.php
+|    |    |__Implementer.php
+|    |
+|    |____Task
+|    |    |____Action
+|    |    |    |__Action.php
+|    |    |    |__AbstractAction.php
+|    |    |    |__ActionCancel.php
+|    |    |    |__ActionRespond.php
+|    |    |    |__ActionAccept.php
+|    |    |    |__ActionDone.php
+|    |    |    |__ActionDeny.php
+|    |    |    |
+|    |    |
+|    |    |__Task.php
+|    |    |__Category.php
+|    |    |
+|    |
+|    |__Feedback.php
+|    |__User_category.php
+|    |__City.php
+|    |
+
+class User - содержит вложенные объекты-значения - "агрегат"
+  содержит конструкторы и методы
+  Modal\User
+
+  > class customer - Modal\User\Modal\User - открывает ветвь методов характерных только для заказчика;
+  > class Implementer - Modal\User\Implementer - открывает ветвь метов характерных только для исполнителя;
+
+  Modal\User\Events
+
+  > class ChangeData - Modal\User\Events\ChangeData - смена и изменения связанные с данными пользователяаватара;
+  > class ChangePassword - Modal\User\Events\ChangePassword - смена пароля и проверка с учетом его уникальности;
+
+class Task - содержит вложенные объекты-значения - "агрегат"
+  содержит конструкторы и методы
+  Modal\Task
+
+  > class Category - Modal\Task\Category - хранит id категории к торой принадлежит только задание,
+      выполняет с этим связанная фильтрация;
+
+  Modal\Task\Action
+
+  > class AbstractAction - TaskForce\classes\Task\Actions
+  > class ActionCancel - TaskForce\classes\Task\Actions - проверка пользователя и статуса New, смена статуса и с соответсвующей периадресацией;
+  > class ActionRespond - TaskForce\classes\Task\Actions - проверка и смена статуса, назначение исполнителя в лист ожидания, для последующего выбора заказчиком;
+  > class ActionAccept - TaskForce\classes\Task\Actions - проверка пользователя и статуса, выбор заказчика из листа ожидания;
+  > class ActionDone - TaskForce\classes\Task\Actions - проверка пользователя, смена статуса на "Выполнено", переадресация на Feedback;
+  > class ActionDeny - TaskForce\classes\Task\Actions - изменение статуса, включение счетчика с изменением рейтинга исполнителя;
+
+class Feedback - Modal\Feedback - отвечает получение данных от заказчика с выполнением оценки - изменение рейтинга исполнителя, получение текстовых данных (комментарий).
+class User_category - Modal\User_category - хранит id категории к которой принадлежит только исполнитель,
+      выполняет с этим связанный поиск?;
+class City - Modal\City - переход введенных данных адреса на в геоданные для карты.

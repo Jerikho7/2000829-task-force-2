@@ -1,4 +1,10 @@
 <?php
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
+var_dump(php_ini_loaded_file());
+
 use TaskForce\classes\Task;
 
 require_once 'vendor/autoload.php';

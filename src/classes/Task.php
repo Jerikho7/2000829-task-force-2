@@ -21,9 +21,9 @@ class Task
     private $implementer_id;
     private $status;
 
-    public function __construct($current_id, $status)
+    public function __construct($customer_id, $status)
     {
-        $this->current_id = $current_id;
+        $this->customer_id = $customer_id;
         $this->status = $status;
     }
 
@@ -60,7 +60,7 @@ class Task
             ];
             return $availableAction[$this->status];
         }
-        if ($current_id === $this->implementer_id) {
+        if ($current_id !== $this->customer_id) {
             $availableAction = [
                 self::STATUS_NEW => self::ACTION_RESPOND,
                 self::STATUS_WORK => self::ACTION_DENY
