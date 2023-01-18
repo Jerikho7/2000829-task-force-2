@@ -3,7 +3,7 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
-use TaskForce\classes\Task\Task;
+use TaskForce\classes\Task;
 
 require_once 'vendor/autoload.php';
 

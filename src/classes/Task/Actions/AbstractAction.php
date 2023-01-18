@@ -2,7 +2,7 @@
 
 namespace TaskForce\classes\Task\Actions;
 
-use TaskForce\classes\Task;
+use TaskForce\classes\Task\Task;
 
 abstract class AbstractAction
 {
