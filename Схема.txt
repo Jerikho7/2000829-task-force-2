@@ -17,7 +17,7 @@ src
 |    |    |    |__AbstractAction.php
 |    |    |    |__ActionCancel.php
 |    |    |    |__ActionRespond.php
-|    |    |    |__ActionAccept.php
+|    |    |    |__ActionStart.php
 |    |    |    |__ActionDone.php
 |    |    |    |__ActionDeny.php
 |    |    |    |
@@ -55,7 +55,7 @@ class Task - содержит вложенные объекты-значения
   > class AbstractAction - TaskForce\classes\Task\Actions
   > class ActionCancel - TaskForce\classes\Task\Actions - проверка пользователя и статуса New, смена статуса и с соответсвующей периадресацией;
   > class ActionRespond - TaskForce\classes\Task\Actions - проверка и смена статуса, назначение исполнителя в лист ожидания, для последующего выбора заказчиком;
-  > class ActionAccept - TaskForce\classes\Task\Actions - проверка пользователя и статуса, выбор заказчика из листа ожидания;
+  > class ActionStart - TaskForce\classes\Task\Actions - проверка пользователя и статуса, выбор заказчика из листа ожидания, переход в статус в работе>
   > class ActionDone - TaskForce\classes\Task\Actions - проверка пользователя, смена статуса на "Выполнено", переадресация на Feedback;
   > class ActionDeny - TaskForce\classes\Task\Actions - изменение статуса, включение счетчика с изменением рейтинга исполнителя;
 
