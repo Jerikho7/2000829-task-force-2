@@ -14,7 +14,7 @@ CREATE TABLE users (
   password CHAR(64) NOT NULL,
   role TINYINT(1) DEFAULT (0),
   avatar_path CHAR(255) NULL,
-  birthday TIMESTAMP DEFAULT NULL,
+  birthday TIMESTAMP NULL DEFAULT NULL,
   phone CHAR(11) NULL,
   telegram varchar(64) NULL,
   information TEXT,
@@ -41,7 +41,8 @@ CREATE TABLE tasks (
   file_id INT,
   user_id INT,
   category_id INT,
-  city_id INT
+  city_id INT,
+  implementer_id INT
 );
 
 CREATE TABLE categories (
@@ -86,6 +87,8 @@ ALTER TABLE tasks
    ADD FOREIGN KEY (city_id) REFERENCES cities (id);
 ALTER TABLE tasks
    ADD FOREIGN KEY (file_id) REFERENCES files (id);
+ALTER TABLE tasks
+   ADD FOREIGN KEY (implementer_id) REFERENCES users (id);
 
 ALTER TABLE user_categories
    ADD FOREIGN KEY (user_id) REFERENCES users (id);
