@@ -40,17 +40,18 @@ class CsvToSqlTranslation {
 
         $this->fileObject->setFlags(
             SplFileObject::DROP_NEW_LINE |
-            SplFileObject::READ_AHEAD |
             SplFileObject::SKIP_EMPTY |
             SplFileObject::READ_CSV
         );
 
         $header_data = $this->getHeaderData();
 
-/*         if ($header_data !== $this->columns) {
+        var_dump($header_data);
+
+        if ($header_data !== $this->columns) {
             throw new FileFormatException("The source file does not contain the required columns!");
-        } */
-        // здесь возник вопрос пока этот фрагмент не был закоментирован он выдавал ошибку The source file does not contain the required columns! - я так понимаю функция $this->getHeaderData(); получила другие данные var_dump я не поняла где смотреть, но комментирование не решиние проблемы, но я так и не додумалась в чем причина)
+        }
+        // здесь возник вопрос пока этот фрагмент не был закоментирован он выдавал ошибку The source file does not contain the required columns! - данные по var_dump сходятся, но я так и не додумалась в чем причина
 
         foreach ($this->getNextLine() as $line) {
             $this->result[] = $line;
@@ -60,7 +61,6 @@ class CsvToSqlTranslation {
     public function getData(): array
     {
         return $this->result;
-//        var_dump($this->getData());
     }
 
     private function getHeaderData(): ?array
@@ -68,7 +68,6 @@ class CsvToSqlTranslation {
         $this->fileObject->rewind();
         $data = $this->fileObject->fgetcsv();
         return $data;
-//        var_dump($this->getHeaderData());
     }
 
     private function getNextLine(): ?iterable {
@@ -104,6 +103,7 @@ class CsvToSqlTranslation {
         $this->tableName = $tableName;
 
         $data = $this->result;
+        var_dump($data);
         $file = new SplFileObject($tableName . '.sql', 'w');
 
         foreach ($data as $string) {
