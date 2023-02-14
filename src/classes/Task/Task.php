@@ -1,6 +1,11 @@
 <?php
 
-namespace TaskForce\classes;
+declare(strict_types=1);
+
+namespace TaskForce\classes\Task;
+
+use TaskForce\classes\Exceptions\AvailableActionsException;
+use TaskForce\classes\Exceptions\StatusException;
 
 class Task
 {
@@ -20,9 +25,9 @@ class Task
     private int $implementer_id;
     private string $status;
 
-    public function __construct($customer_id, $status)
+    public function __construct(int $customer_id, string $status)
     {
-        if (!in_array($status, $this->getMapStatus)) {
+        if (!in_array($status, array_keys($this->getMapStatus()))) {
             throw new StatusException("$status doesn't exist!");
         }
         $this->customer_id = $customer_id;
@@ -51,7 +56,7 @@ class Task
         ];
     }
 
-    public function getAvailableActions($current_id, $status): string
+    public function getAvailableActions($current_id, $status): array
     {
         if ($current_id === $this->customer_id) {
             $availableAction = [
@@ -60,7 +65,7 @@ class Task
                 self::ACTION_CANCEL,
                 self::ACTION_START,
                 ],
-                self::STATUS_WORK => self::ACTION_DONE
+                self::STATUS_WORK => [self::ACTION_DONE]
             ];
             return $availableAction[$status];
         }
@@ -69,7 +74,7 @@ class Task
                 self::STATUS_NEW => self::ACTION_RESPOND,
                 self::STATUS_WORK => self::ACTION_DENY
             ];
-            return $availableAction[$status];
+            return [$availableAction[$status]];
         }
         throw new AvailableActionsException("$current_id doesn't have available action!");
     }
