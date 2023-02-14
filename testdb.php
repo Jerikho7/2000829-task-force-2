@@ -11,5 +11,5 @@ $categories->generateSqlFile('categories');
 
 $cities = new CsvToSqlTranslation('./data/cities.csv', ['name', 'lat', 'long']);
 
-$categories->importCsv();
-$categories->generateSqlFile('cities');
+$cities->importCsv();
+$cities->generateSqlFile('cities');

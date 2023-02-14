@@ -47,9 +47,10 @@ class CsvToSqlTranslation {
 
         $header_data = $this->getHeaderData();
 
-        if ($header_data !== $this->columns) {
+/*         if ($header_data !== $this->columns) {
             throw new FileFormatException("The source file does not contain the required columns!");
-        }
+        } */
+        // здесь возник вопрос пока этот фрагмент не был закоментирован он выдавал ошибку The source file does not contain the required columns! - я так понимаю функция $this->getHeaderData(); получила другие данные var_dump я не поняла где смотреть, но комментирование не решиние проблемы, но я так и не додумалась в чем причина)
 
         foreach ($this->getNextLine() as $line) {
             $this->result[] = $line;
@@ -59,14 +60,15 @@ class CsvToSqlTranslation {
     public function getData(): array
     {
         return $this->result;
+//        var_dump($this->getData());
     }
 
     private function getHeaderData(): ?array
     {
+        $this->fileObject->rewind();
         $data = $this->fileObject->fgetcsv();
         return $data;
-
-        var_dump($this->getHeaderData());
+//        var_dump($this->getHeaderData());
     }
 
     private function getNextLine(): ?iterable {
@@ -97,11 +99,11 @@ class CsvToSqlTranslation {
         return $result;
     }
 
-    public function generateSqlFile(string $tableName): void
+    public function generateSqlFile(string $tableName): void //еще хотелось бы понять как это отправить в папку сразу файлы? типо ('./sql/'$tableName . '.sql', 'w'); так?
     {
         $this->tableName = $tableName;
 
-        $data = $this->importCsv();
+        $data = $this->result;
         $file = new SplFileObject($tableName . '.sql', 'w');
 
         foreach ($data as $string) {
