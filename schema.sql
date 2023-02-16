@@ -26,8 +26,8 @@ CREATE TABLE cities (
   id INT AUTO_INCREMENT PRIMARY KEY,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   name VARCHAR(255) NOT NULL UNIQUE,
-  longitude decimal(11,8) NOT NULL,
-  latitude decimal(11,8) NOT NULL
+  lat decimal(11,8) NOT NULL,
+  lng decimal(11,8) NOT NULL
 );
 
 CREATE TABLE tasks (
@@ -47,7 +47,8 @@ CREATE TABLE tasks (
 
 CREATE TABLE categories (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(255) NOT NULL
+  name VARCHAR(255) NOT NULL,
+  icon VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE user_categories (

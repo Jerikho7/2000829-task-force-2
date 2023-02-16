@@ -51,7 +51,6 @@ class CsvToSqlTranslation {
         if ($header_data !== $this->columns) {
             throw new FileFormatException("The source file does not contain the required columns!");
         }
-        // здесь возник вопрос пока этот фрагмент не был закоментирован он выдавал ошибку The source file does not contain the required columns! - данные по var_dump сходятся, но я так и не додумалась в чем причина
 
         foreach ($this->getNextLine() as $line) {
             $this->result[] = $line;
@@ -67,6 +66,7 @@ class CsvToSqlTranslation {
     {
         $this->fileObject->rewind();
         $data = $this->fileObject->fgetcsv();
+        $data = preg_replace('/[^A-Za-z0-9\-]/', '', $data);
         return $data;
     }
 
@@ -98,7 +98,7 @@ class CsvToSqlTranslation {
         return $result;
     }
 
-    public function generateSqlFile(string $tableName): void //еще хотелось бы понять как это отправить в папку сразу файлы? типо ('./sql/'$tableName . '.sql', 'w'); так?
+    public function generateSqlFile(string $tableName): void
     {
         $this->tableName = $tableName;
 

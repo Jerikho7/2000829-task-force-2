@@ -9,7 +9,7 @@ $categories = new CsvToSqlTranslation('./data/categories.csv', ['name', 'icon'])
 $categories->importCsv();
 $categories->generateSqlFile('categories');
 
-$cities = new CsvToSqlTranslation('./data/cities.csv', ['name', 'lat', 'long']);
+$cities = new CsvToSqlTranslation('./data/cities.csv', ['name', 'lat', 'lng']);
 
 $cities->importCsv();
 $cities->generateSqlFile('cities');
